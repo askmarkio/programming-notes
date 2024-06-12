@@ -408,10 +408,87 @@ print(my_tuples[1][2]) # False
 set()
 
 
+## Classes
+
+I have zero idea about why I am having a bad time with these. Here is a recent problem that I wrote to resolve:
+
+url: https://www.boot.dev/lessons/d0da006c-6562-41c0-a7f6-93e795cf078d
+
+The question
+"""
+
+Library
+
+You've been tasked with writing some code for your public library, complete the Library and Book classes listed below.
+Book class
+__init__(self, title, author)
+
+Set .title and .author to the values of the parameters.
+Library class
+
+Add the following methods.
+__init__(self, name)
+
+Initialize a .name member variable to the value of the name parameter. Create a .books member initialized to an empty list.
+add_book(self, book)
+
+Add book, a Book instance, to the books instance variable by appending it to the end of the list.
+remove_book(self, book)
+
+If the book's title and author match a library book's title and author, the remove_book method should remove that library book from the list.
+search_books(self, search_string)
+
+For every book in the library check if the search_string is contained in the title or author field (case insensitive). Return a list of all books that match the search string, ordered in the same order as they were added to the library.
+Hints
+
+You can use the .lower() method to convert a string to lowercase.
+"""
 
 
+Here was the solution I painstakenly came up with after lots of hints and suggestions:
 
 
+"""
+class Book:
+    def __init__(self, title, author):
+        self.title = title
+        self.author = author
+
+
+class Library:
+    def __init__(self, name):
+        self.name = name
+        self.books = []
+
+    def add_book(self, book):
+        self.books.append(book)
+
+    def remove_book(self, book):
+        for libbook in self.books:
+            if libbook.title == book.title and libbook.author == book.author:
+                self.books.remove(libbook)
+
+    def search_books(self, search_string):
+        results = []
+        for book in self.books:
+            if search_string.lower() in book.title.lower() or search_string.lower() in book.author.lower():
+                results.append(book)
+        return results 
+"""
+
+
+Now I will walk myself through the code to help in my understanding. I'll return to this later and correct if I am wrong.
+
+I keep having issues creating instances of the class when it isn't needed. Here is an early copy of the code:
+"""
+def add_book(self, book):
+    book = Book(title, author)  # This line recreates the book
+    self.books.append(book)
+"""
+This is an example of me not reading what the existing method is doing. I was instantiating a new book object and overwritting the book that was being supplied in the method.
+
+In the classes, we are using an constructor which gives the defaults for an object, which can be overwritten inside a module.
+These default variables are accessible to all modules to call.
 
 
 
